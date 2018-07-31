@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://player/Player1.gd" type="Script" id=1]
 [ext_resource path="res://player/zlurp_attack.png" type="Texture" id=2]
@@ -6,31 +6,19 @@
 [ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=4]
 [ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=5]
 [ext_resource path="res://player/FSM/states/idle/idle.tscn" type="PackedScene" id=6]
-[ext_resource path="res://player/FSM/states/idle/idle.gd" type="Script" id=7]
-[ext_resource path="res://player/FSM/states/ATTACK/ATTACK.tscn" type="PackedScene" id=8]
-[ext_resource path="res://player/FSM/states/ATTACK/ATTACK.gd" type="Script" id=9]
-[ext_resource path="res://player/FSM/states/ROLL/ROLL.tscn" type="PackedScene" id=10]
-[ext_resource path="res://player/FSM/states/ROLL/ROLL.gd" type="Script" id=11]
-[ext_resource path="res://player/FSM/states/SKID/SKID.tscn" type="PackedScene" id=12]
-[ext_resource path="res://player/FSM/states/SKID/SKID.gd" type="Script" id=13]
-[ext_resource path="res://player/FSM/states/SLIDE/SLIDE.tscn" type="PackedScene" id=14]
-[ext_resource path="res://player/FSM/states/SLIDE/SLIDE.gd" type="Script" id=15]
-[ext_resource path="res://player/FSM/transitions/on_attack/on_attack.tscn" type="PackedScene" id=16]
-[ext_resource path="res://player/FSM/transitions/on_attack/on_attack.gd" type="Script" id=17]
-[ext_resource path="res://player/FSM/transitions/on_attack_end/on_attack_end.tscn" type="PackedScene" id=18]
-[ext_resource path="res://player/FSM/transitions/on_attack_end/on_attack_end.gd" type="Script" id=19]
-[ext_resource path="res://player/FSM/transitions/on_walk/on_walk.tscn" type="PackedScene" id=20]
-[ext_resource path="res://player/FSM/transitions/on_walk/on_walk.gd" type="Script" id=21]
-[ext_resource path="res://player/FSM/transitions/on_roll_end/on_roll_end.tscn" type="PackedScene" id=22]
-[ext_resource path="res://player/FSM/transitions/on_roll_end/on_roll_end.gd" type="Script" id=23]
-[ext_resource path="res://player/FSM/transitions/skid_to_stop/skid_to_stop.tscn" type="PackedScene" id=24]
-[ext_resource path="res://player/FSM/transitions/skid_to_stop/skid_to_stop.gd" type="Script" id=25]
-[ext_resource path="res://player/FSM/transitions/on_slide/on_slide.tscn" type="PackedScene" id=26]
-[ext_resource path="res://player/FSM/transitions/on_slide/on_slide.gd" type="Script" id=27]
-[ext_resource path="res://player/FSM/transitions/on_slide_end/on_slide_end.tscn" type="PackedScene" id=28]
-[ext_resource path="res://player/FSM/transitions/on_slide_end/on_slide_end.gd" type="Script" id=29]
+[ext_resource path="res://player/FSM/states/ATTACK/ATTACK.tscn" type="PackedScene" id=7]
+[ext_resource path="res://player/FSM/states/ROLL/ROLL.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player/FSM/states/SKID/SKID.tscn" type="PackedScene" id=9]
+[ext_resource path="res://player/FSM/states/SLIDE/SLIDE.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player/FSM/transitions/on_attack/on_attack.tscn" type="PackedScene" id=11]
+[ext_resource path="res://player/FSM/transitions/on_attack_end/on_attack_end.tscn" type="PackedScene" id=12]
+[ext_resource path="res://player/FSM/transitions/on_walk/on_walk.tscn" type="PackedScene" id=13]
+[ext_resource path="res://player/FSM/transitions/on_roll_end/on_roll_end.tscn" type="PackedScene" id=14]
+[ext_resource path="res://player/FSM/transitions/skid_to_stop/skid_to_stop.tscn" type="PackedScene" id=15]
+[ext_resource path="res://player/FSM/transitions/on_slide/on_slide.tscn" type="PackedScene" id=16]
+[ext_resource path="res://player/FSM/transitions/on_slide_end/on_slide_end.tscn" type="PackedScene" id=17]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 
 resource_name = "attack"
 length = 0.7
@@ -43,7 +31,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 2 ) ]
@@ -84,8 +72,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Attack:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource_name = "idle"
 length = 3.0
@@ -139,13 +139,25 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Attack:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 
 resource_name = "roll"
-length = 0.2
+length = 0.8
 loop = true
-step = 0.05
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -177,7 +189,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.2 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 5 ]
@@ -189,10 +201,22 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 90.0, 180.0, 270.0 ]
+"values": [ 0.0, 90.0, 180.0, 270.0, 360.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Attack:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="CircleShape2D" id=4]
@@ -200,10 +224,16 @@ tracks/3/keys = {
 custom_solver_bias = 0.0
 radius = 5.5
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=5]
 
 custom_solver_bias = 0.0
-radius = 10.0
+radius = 13.0
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="CircleShape2D" id=6]
+
+custom_solver_bias = 0.0
+radius = 6.0
 
 [node name="Player1" type="KinematicBody2D" index="0"]
 
@@ -213,8 +243,7 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform", "collision" ]
-max_speed = 80.0
+_sections_unfolded = [ "Collision", "Transform", "collision" ]
 
 [node name="Animation" type="AnimationPlayer" parent="." index="0"]
 
@@ -223,9 +252,9 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/attack = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/roll = SubResource( 5 )
+anims/attack = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/roll = SubResource( 3 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
@@ -234,16 +263,16 @@ _sections_unfolded = [ "Playback Options" ]
 position = Vector2( 1, 0 )
 texture = ExtResource( 2 )
 hframes = 15
-frame = 14
+frame = 6
 _sections_unfolded = [ "Transform" ]
 
 [node name="_debug" type="Label" parent="." index="2"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -20.0
 margin_top = -20.0
 margin_right = -64.0
 margin_bottom = -70.0
@@ -261,26 +290,12 @@ _sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
-visible = false
-position = Vector2( 0.128326, 2.05316 )
 shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Attack" type="Area2D" parent="." index="4"]
+[node name="FSM" type="Node2D" parent="." index="4"]
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" index="0"]
-
-shape = SubResource( 1 )
-
-[node name="FSM" type="Node2D" parent="." index="5"]
-
+editor/display_folded = true
 script = ExtResource( 4 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
@@ -297,27 +312,27 @@ enableDebug = false
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"ATTACK": Vector2( 359, 330 ),
-"ATTACK_": Vector2( 359, 330 ),
-"IDLE": Vector2( 687, 314 ),
-"IDLE_": Vector2( 687, 314 ),
-"ROLL": Vector2( 1024, 192 ),
-"ROLL_": Vector2( 1024, 192 ),
-"SKID": Vector2( 1133, 427 ),
-"SKID_": Vector2( 1133, 427 ),
+"ATTACK": Vector2( 428, 281 ),
+"ATTACK_": Vector2( 428, 281 ),
+"IDLE": Vector2( 660, 384 ),
+"IDLE_": Vector2( 660, 384 ),
+"ROLL": Vector2( 861, 80 ),
+"ROLL_": Vector2( 861, 80 ),
+"SKID": Vector2( 1165, 442 ),
+"SKID_": Vector2( 1165, 442 ),
 "SLIDE": Vector2( 974, 733 ),
 "SLIDE_": Vector2( 974, 733 ),
 "idle": Vector2( 764, 384 ),
 "idle_": Vector2( 764, 384 ),
 "idle__": Vector2( 518, 302 ),
-"on_attack": Vector2( 550, 468 ),
-"on_attack_": Vector2( 550, 468 ),
-"on_attack_end": Vector2( 380, 139 ),
-"on_attack_end_": Vector2( 380, 139 ),
-"on_roll": Vector2( 743, 198 ),
-"on_roll_": Vector2( 743, 198 ),
-"on_roll_end": Vector2( 1281, 271 ),
-"on_roll_end_": Vector2( 1281, 271 ),
+"on_attack": Vector2( 567, 142 ),
+"on_attack_": Vector2( 567, 142 ),
+"on_attack_end": Vector2( 577, 593 ),
+"on_attack_end_": Vector2( 577, 593 ),
+"on_roll": Vector2( 780, 206 ),
+"on_roll_": Vector2( 780, 206 ),
+"on_roll_end": Vector2( 1144, 312 ),
+"on_roll_end_": Vector2( 1144, 312 ),
 "on_slide": Vector2( 828, 592 ),
 "on_slide_": Vector2( 828, 592 ),
 "on_slide_end": Vector2( 1126, 602 ),
@@ -330,77 +345,90 @@ GraphData = {
 
 [node name="States" type="Node2D" parent="FSM" index="0"]
 
-[node name="IDLE" type="Node" parent="FSM/States" index="0" instance=ExtResource( 6 )]
+[node name="IDLE" parent="FSM/States" index="0" instance=ExtResource( 6 )]
 
-script = ExtResource( 7 )
+[node name="ATTACK" parent="FSM/States" index="1" instance=ExtResource( 7 )]
 
-[node name="ATTACK" type="Node" parent="FSM/States" index="1" instance=ExtResource( 8 )]
+[node name="ROLL" parent="FSM/States" index="2" instance=ExtResource( 8 )]
 
-script = ExtResource( 9 )
+[node name="SKID" parent="FSM/States" index="3" instance=ExtResource( 9 )]
 
-[node name="ROLL" type="Node" parent="FSM/States" index="2" instance=ExtResource( 10 )]
-
-script = ExtResource( 11 )
-
-[node name="SKID" type="Node" parent="FSM/States" index="3" instance=ExtResource( 12 )]
-
-script = ExtResource( 13 )
-
-[node name="SLIDE" type="Node" parent="FSM/States" index="4" instance=ExtResource( 14 )]
-
-script = ExtResource( 15 )
+[node name="SLIDE" parent="FSM/States" index="4" instance=ExtResource( 10 )]
 
 [node name="Transitions" type="Node2D" parent="FSM" index="1"]
 
-[node name="on_attack" type="Node" parent="FSM/Transitions" index="0" instance=ExtResource( 16 )]
+[node name="on_attack" parent="FSM/Transitions" index="0" instance=ExtResource( 11 )]
 
-script = ExtResource( 17 )
-path2SourceStates = [ NodePath(""), NodePath("../../States/idle"), NodePath("../../States/IDLE") ]
+path2SourceStates = [ NodePath(""), NodePath("../../States/idle"), NodePath("../../States/IDLE"), NodePath("../../States/ROLL") ]
 path2TargetState = NodePath("../../States/ATTACK")
-intervalBetweenChecks = -1.0
 
-[node name="on_attack_end" type="Node" parent="FSM/Transitions" index="1" instance=ExtResource( 18 )]
+[node name="on_attack_end" parent="FSM/Transitions" index="1" instance=ExtResource( 12 )]
 
-script = ExtResource( 19 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/ATTACK") ]
 path2TargetState = NodePath("../../States/IDLE")
-intervalBetweenChecks = -1.0
 
-[node name="on_roll" type="Node" parent="FSM/Transitions" index="2" instance=ExtResource( 20 )]
+[node name="on_roll" parent="FSM/Transitions" index="2" instance=ExtResource( 13 )]
 
-script = ExtResource( 21 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/IDLE") ]
 path2TargetState = NodePath("../../States/ROLL")
-intervalBetweenChecks = -1.0
 
-[node name="on_roll_end" type="Node" parent="FSM/Transitions" index="3" instance=ExtResource( 22 )]
+[node name="on_roll_end" parent="FSM/Transitions" index="3" instance=ExtResource( 14 )]
 
-script = ExtResource( 23 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/ROLL") ]
-path2TargetState = NodePath("../../States/SKID")
-intervalBetweenChecks = -1.0
+path2TargetState = NodePath("../../States/IDLE")
 
-[node name="skid_to_stop" type="Node" parent="FSM/Transitions" index="4" instance=ExtResource( 24 )]
+[node name="skid_to_stop" parent="FSM/Transitions" index="4" instance=ExtResource( 15 )]
 
-script = ExtResource( 25 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/SKID") ]
 path2TargetState = NodePath("../../States/IDLE")
-intervalBetweenChecks = -1.0
 
-[node name="on_slide" type="Node" parent="FSM/Transitions" index="5" instance=ExtResource( 26 )]
+[node name="on_slide" parent="FSM/Transitions" index="5" instance=ExtResource( 16 )]
 
-script = ExtResource( 27 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/IDLE") ]
 path2TargetState = NodePath("../../States/SLIDE")
-intervalBetweenChecks = -1.0
 
-[node name="on_slide_end" type="Node" parent="FSM/Transitions" index="6" instance=ExtResource( 28 )]
+[node name="on_slide_end" parent="FSM/Transitions" index="6" instance=ExtResource( 17 )]
 
-script = ExtResource( 29 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/SLIDE") ]
 path2TargetState = NodePath("../../States/SKID")
-intervalBetweenChecks = -1.0
 
-[connection signal="animation_finished" from="Animation" to="FSM/States/ATTACK" method="_on_Animation_animation_finished"]
+[node name="Attack" type="Area2D" parent="." index="5"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+collision_layer = 2
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" index="0"]
+
+shape = SubResource( 5 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="hitbox" type="Area2D" parent="." index="6"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
+
+shape = SubResource( 6 )
+
+[connection signal="animation_finished" from="Animation" to="." method="attack_over"]
 
 

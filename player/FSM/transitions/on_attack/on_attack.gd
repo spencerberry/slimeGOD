@@ -23,10 +23,10 @@ func transitionInit(inParam1=null, inParam2=null, inParam3=null, inParam4=null, 
 	#you can optionally implement this to initialize transition on it's creation time 
 	pass
 
-func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null): 
+func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null):
+	logicRoot.attacking=true
 	#you can optionally implement this to reset transition when related state has been activated
 	pass
 
 func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null):
-	if Input.is_action_pressed("p1_attack"): return true;
-	return false;
+	return Input.is_action_pressed("p1_attack")

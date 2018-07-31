@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/Player1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/axeman.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node" index="0"]
 
@@ -11,6 +13,36 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Map" parent="." index="0" instance=ExtResource( 2 )]
 
+position = Vector2( 0, -40 )
+_sections_unfolded = [ "Material", "Visibility", "Z Index" ]
+
 [node name="Player1" parent="." index="1" instance=ExtResource( 3 )]
+
+[node name="Camera" parent="Player1" index="6" instance=ExtResource( 4 )]
+
+current = true
+limit_left = 0
+limit_right = 320
+limit_bottom = 120
+smoothing_enabled = true
+smoothing_speed = 4.0
+drag_margin_top = 0.5
+drag_margin_bottom = 0.0
+_sections_unfolded = [ "Drag Margin", "Limit", "Smoothing" ]
+
+[node name="axeman" parent="." index="2" instance=ExtResource( 5 )]
+
+position = Vector2( 290, 80 )
+sight_range = null
+
+[node name="axeman2" parent="." index="3" instance=ExtResource( 5 )]
+
+position = Vector2( 220, 0 )
+sight_range = null
+
+[node name="axeman3" parent="." index="4" instance=ExtResource( 5 )]
+
+position = Vector2( 270, -10 )
+sight_range = null
 
 

@@ -1,0 +1,213 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://entities/axeman.gd" type="Script" id=1]
+[ext_resource path="res://entities/axeman_idle.png" type="Texture" id=2]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=3]
+[ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=4]
+[ext_resource path="res://entities/FSM/states/Wander/Wander.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/FSM/states/ATTACK/ATTACK.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/FSM/states/DEFEND/DEFEND.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/FSM/transitions/on_find_target/on_find_target.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/FSM/transitions/attack_end/attack_end.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/FSM/transitions/on_lose_sight/on_lose_sight.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/FSM/transitions/attack_ready/attack_ready.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=12]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "walk"
+length = 0.6
+loop = true
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5, 8 )
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="DynamicFont" id=3]
+
+size = 4
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 12 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6, 9 )
+
+[node name="axeman" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "collision" ]
+sight_range = 80
+
+[node name="Animation" type="AnimationPlayer" parent="." index="0"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 4.0
+anims/walk = SubResource( 1 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+modulate = Color( 1, 1, 1, 0.54698 )
+texture = ExtResource( 2 )
+hframes = 2
+frame = 1
+_sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 2 )
+_sections_unfolded = [ "Pause", "Transform" ]
+
+[node name="FSM2D" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
+script = ExtResource( 3 )
+_sections_unfolded = [ "Create new:" ]
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
+path2LogicRoot = NodePath("..")
+onlyActiveStateOnTheScene = false
+initManually = false
+updateMode = 1
+receiceSignalsOnly4ActiveStatesAndTransitions = true
+enableDebug = false
+"Initial state:" = ""
+"Create new:/Subdirectory for FSM nodes:" = "FSM"
+"Create new:/Create state with name:" = null
+"Create new:/Create transition with name:" = null
+GraphData = {
+"ATTACK": Vector2( 657, 784 ),
+"ATTACK_": Vector2( 657, 784 ),
+"DEFEND": Vector2( 1112, 484 ),
+"DEFEND_": Vector2( 1112, 484 ),
+"WANDER": Vector2( 643, 395 ),
+"WANDER_": Vector2( 643, 395 ),
+"Wander": Vector2( 497, 366 ),
+"Wander_": Vector2( 497, 366 ),
+"attack_end": Vector2( 1171, 705 ),
+"attack_end_": Vector2( 1171, 705 ),
+"attack_ready": Vector2( 868, 672 ),
+"attack_ready_": Vector2( 868, 672 ),
+"on_find_target": Vector2( 636, 612 ),
+"on_find_target_": Vector2( 636, 612 ),
+"on_lose_sight": Vector2( 808, 497 ),
+"on_lose_sight_": Vector2( 808, 497 )
+}
+
+[node name="States" type="Node2D" parent="FSM2D" index="0"]
+
+[node name="WANDER" parent="FSM2D/States" index="0" instance=ExtResource( 5 )]
+
+[node name="ATTACK" parent="FSM2D/States" index="1" instance=ExtResource( 6 )]
+
+[node name="DEFEND" parent="FSM2D/States" index="2" instance=ExtResource( 7 )]
+
+[node name="Transitions" type="Node2D" parent="FSM2D" index="1"]
+
+[node name="on_find_target" parent="FSM2D/Transitions" index="0" instance=ExtResource( 8 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/Wander"), NodePath("../../States/WANDER") ]
+path2TargetState = NodePath("../../States/ATTACK")
+
+[node name="attack_end" parent="FSM2D/Transitions" index="1" instance=ExtResource( 9 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/ATTACK") ]
+path2TargetState = NodePath("../../States/DEFEND")
+
+[node name="on_lose_sight" parent="FSM2D/Transitions" index="2" instance=ExtResource( 10 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/DEFEND") ]
+path2TargetState = NodePath("../../States/WANDER")
+
+[node name="attack_ready" parent="FSM2D/Transitions" index="3" instance=ExtResource( 11 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/DEFEND") ]
+path2TargetState = NodePath("../../States/ATTACK")
+
+[node name="Vision" type="RayCast2D" parent="." index="4"]
+
+visible = false
+enabled = false
+exclude_parent = true
+cast_to = Vector2( 0, 50 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="_debug" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -6.0
+margin_top = -22.0
+margin_right = -42.0
+margin_bottom = -8.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 3 )
+text = "0.2
+0.2"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="hitbox" type="Area2D" parent="." index="6"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+collision_layer = 0
+collision_mask = 10
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
+
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="area_shape_entered" from="hitbox" to="." method="_on_hitbox_area_shape_entered"]
+
+

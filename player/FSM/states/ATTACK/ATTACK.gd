@@ -4,7 +4,7 @@ extends "res://addons/net.kivano.fsm/content/FSMState.gd";
 #
 #
 
-##################################################################################
+
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
 ######################### var myvar setget myvar_set,myvar_get ###################
 
@@ -24,21 +24,20 @@ func stateInit(inParam1=null,inParam2=null,inParam3=null,inParam4=null, inParam5
 
 #when entering state, usually you will want to reset internal state here somehow
 func enter(fromStateID=null, fromTransitionID=null, inArg0=null,inArg1=null, inArg2=null):
-	logicRoot.attacking = true
-	logicRoot.choose_animation("attack")
+	logicRoot.attack()
 
 #when updating state, paramx can be used only if updating fsm manually
 func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param4=null):
-	print('attacking')
-#when exiting state
+	logicRoot.input_move()
+	logicRoot.apply_movement()
+
 func exit(toState=null):
 	pass
 
 ##################################################################################
 #########                       Connected Signals                        #########
 ##################################################################################
-func _on_Animation_animation_finished(anim_name):
-	logicRoot.attacking = false # replace with function body
+
 ##################################################################################
 #########     Methods fired because of events (usually via Groups interface)  ####
 ##################################################################################
@@ -54,4 +53,6 @@ func _on_Animation_animation_finished(anim_name):
 ##################################################################################
 #########                         Inner Classes                          #########
 ##################################################################################
+
+
 

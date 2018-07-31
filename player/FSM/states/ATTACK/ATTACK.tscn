@@ -2,7 +2,7 @@
 
 [ext_resource path="res://player/FSM/states/ATTACK/ATTACK.gd" type="Script" id=1]
 
-[node name="ATTACK" type="Node"]
+[node name="ATTACK" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

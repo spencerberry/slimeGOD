@@ -1,29 +1,18 @@
-extends KinematicBody2D
+extends "res://entities/entity.gd"
 
-export (float) var max_speed 	#pixels per second
-#export (float) var acceleration #pps per second
-#export (float) var friction
+const SPEED = 80
+const TYPE = "player"
+const DAMAGE = 1
 
-var velocity = Vector2()
-var direction = Vector2()
-
-var attacking = false
+var attacking = true
 
 func _ready():
 	pass
 
 func _physics_process(delta):
-	var move = input_move()
-	var attack = Input.is_action_pressed("p1_attack")
-	
-	direction = move
-	apply_movement(move)
-	
-	$_debug.text = str(direction)
+	$_debug.text = str($Attack.monitorable)
 
-func input_move():
-	var move = Vector2()
-	
+func input_move():	
 	var left 	= Input.is_action_pressed("p1_left")
 	var right 	= Input.is_action_pressed("p1_right")
 	var up 		= Input.is_action_pressed("p1_up")
@@ -31,14 +20,11 @@ func input_move():
 	
 	move.x = -int(left) + int(right)
 	move.y = -int(up) + int(down)
+	
+func attack():
+	choose_animation("attack")
+	attacking = true
 
-	return move
-
-func apply_movement(move):
-	velocity = move.normalized()*max_speed
-	move_and_slide(velocity, Vector2(0,0))
-			
-func choose_animation(animation):
-	var newAnimation = animation
-	if $Animation.current_animation != newAnimation:
-		$Animation.play(newAnimation);
+func attack_over(anim_name):
+	if anim_name == "attack":
+		attacking = false
