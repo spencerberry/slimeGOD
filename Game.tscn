@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Map.tscn" type="PackedScene" id=2]
-[ext_resource path="res://player/Player1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Camera.tscn" type="PackedScene" id=4]
-[ext_resource path="res://entities/axeman.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/axeman.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/Player1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 40
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 6 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Game" type="Node" index="0"]
 
@@ -13,36 +22,58 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Map" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 0, -40 )
-_sections_unfolded = [ "Material", "Visibility", "Z Index" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
-[node name="Player1" parent="." index="1" instance=ExtResource( 3 )]
+[node name="axeman" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="Camera" parent="Player1" index="6" instance=ExtResource( 4 )]
+position = Vector2( -1105.88, -459.49 )
 
-current = true
-limit_left = 0
-limit_right = 320
-limit_bottom = 120
+[node name="axeman2" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 1133.68, -446.263 )
+
+[node name="Player1" parent="." index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 60.3484, 464.719 )
+
+[node name="Camera" parent="Player1" index="8" instance=ExtResource( 5 )]
+
+position = Vector2( 1002.28, 552.163 )
+scale = Vector2( 2, 2 )
+zoom = Vector2( 2, 2 )
+limit_left = 1280
+limit_top = -1280
+limit_right = 1280
+limit_bottom = 720
+limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 4.0
 drag_margin_top = 0.5
 drag_margin_bottom = 0.0
-_sections_unfolded = [ "Drag Margin", "Limit", "Smoothing" ]
+_sections_unfolded = [ "Drag Margin", "Limit", "Smoothing", "Transform" ]
 
-[node name="axeman" parent="." index="2" instance=ExtResource( 5 )]
+[node name="_debug" type="Label" parent="Player1/Camera" index="0"]
 
-position = Vector2( 290, 80 )
-sight_range = null
-
-[node name="axeman2" parent="." index="3" instance=ExtResource( 5 )]
-
-position = Vector2( 220, 0 )
-sight_range = null
-
-[node name="axeman3" parent="." index="4" instance=ExtResource( 5 )]
-
-position = Vector2( 270, -10 )
-sight_range = null
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -1806.0
+margin_top = 2603.0
+margin_right = 2075.0
+margin_bottom = 2814.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "oops"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 

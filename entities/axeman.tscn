@@ -1,100 +1,323 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://entities/axeman.gd" type="Script" id=1]
-[ext_resource path="res://entities/axeman_idle.png" type="Texture" id=2]
-[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=3]
-[ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=4]
-[ext_resource path="res://entities/FSM/states/Wander/Wander.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/FSM/states/ATTACK/ATTACK.tscn" type="PackedScene" id=6]
-[ext_resource path="res://entities/FSM/states/DEFEND/DEFEND.tscn" type="PackedScene" id=7]
-[ext_resource path="res://entities/FSM/transitions/on_find_target/on_find_target.tscn" type="PackedScene" id=8]
-[ext_resource path="res://entities/FSM/transitions/attack_end/attack_end.tscn" type="PackedScene" id=9]
-[ext_resource path="res://entities/FSM/transitions/on_lose_sight/on_lose_sight.tscn" type="PackedScene" id=10]
-[ext_resource path="res://entities/FSM/transitions/attack_ready/attack_ready.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://entities/Axemob/idlesway_body.png" type="Texture" id=2]
+[ext_resource path="res://entities/Axemob/idlesway_axe.png" type="Texture" id=3]
+[ext_resource path="res://entities/Axemob/attackright_body.png" type="Texture" id=4]
+[ext_resource path="res://entities/Axemob/attackright_axe.png" type="Texture" id=5]
+[ext_resource path="res://entities/Axemob/walkdown_body.png" type="Texture" id=6]
+[ext_resource path="res://entities/Axemob/walkdown_axe.png" type="Texture" id=7]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=8]
+[ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=9]
+[ext_resource path="res://entities/FSM/states/Wander/Wander.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/FSM/states/ATTACK/ATTACK.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/FSM/states/DEFEND/DEFEND.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/FSM/states/SEARCH/SEARCH.tscn" type="PackedScene" id=13]
+[ext_resource path="res://entities/FSM/states/SEARCH/SEARCH.gd" type="Script" id=14]
+[ext_resource path="res://entities/FSM/states/PURSUE/PURSUE.tscn" type="PackedScene" id=15]
+[ext_resource path="res://entities/FSM/states/PURSUE/PURSUE.gd" type="Script" id=16]
+[ext_resource path="res://entities/FSM/transitions/on_find_target/on_find_target.tscn" type="PackedScene" id=17]
+[ext_resource path="res://entities/FSM/transitions/attack_end/attack_end.tscn" type="PackedScene" id=18]
+[ext_resource path="res://entities/FSM/transitions/on_lose_sight/on_lose_sight.tscn" type="PackedScene" id=19]
+[ext_resource path="res://entities/FSM/transitions/attack_ready/attack_ready.tscn" type="PackedScene" id=20]
+[ext_resource path="res://entities/FSM/transitions/on_search_fail/on_search_fail.tscn" type="PackedScene" id=21]
+[ext_resource path="res://entities/FSM/transitions/on_search_fail/on_search_fail.gd" type="Script" id=22]
+[ext_resource path="res://entities/FSM/transitions/in_range/in_range.tscn" type="PackedScene" id=23]
+[ext_resource path="res://entities/FSM/transitions/in_range/in_range.gd" type="Script" id=24]
+[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=25]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=2]
 
-resource_name = "walk"
-length = 0.6
+resource_name = "idlesway"
+length = 1.8
 loop = true
-step = 0.3
+step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("SpriteBody:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 0.8, 0.9, 1.2, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteBody:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteBody/SpriteAxe:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteBody/SpriteAxe:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8, 0.9, 1.2, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteBody/SpriteAxe:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8, 0.9, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.705882 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.705882 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="Animation" id=1]
 
-custom_solver_bias = 0.0
-extents = Vector2( 5, 8 )
-_sections_unfolded = [ "Resource" ]
+resource_name = "swing"
+length = 1.0
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteBody/SpriteAxe:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 28.8373, 8.65118 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteBody/SpriteAxe:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -0.7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteBody/SpriteAxe:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteBody:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteBody:hframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpriteBody/SpriteAxe:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SpriteBody/SpriteAxe:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteBody/SpriteAxe:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.15, 0.45, 0.65, 0.85, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SpriteBody:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.15, 0.45, 0.65, 0.85, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="Animation" id=3]
 
-size = 4
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 12 )
-_sections_unfolded = [ "Font", "Settings" ]
+length = 0.48
+loop = true
+step = 0.08
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteBody:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpriteBody:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpriteBody/SpriteAxe:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteBody/SpriteAxe:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 6, 9 )
+extents = Vector2( 40, 90 )
+_sections_unfolded = [ "Resource" ]
 
-[node name="axeman" type="KinematicBody2D" index="0"]
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 42, 90 )
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 25 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="axeman" type="KinematicBody2D" index="0" groups=[
+"enemies",
+]]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "collision" ]
-sight_range = 80
+_sections_unfolded = [ "Collision", "Transform", "collision" ]
 
 [node name="Animation" type="AnimationPlayer" parent="." index="0"]
 
 root_node = NodePath("..")
-autoplay = ""
+autoplay = "idlesway"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
-playback_speed = 4.0
-anims/walk = SubResource( 1 )
+playback_speed = 1.0
+anims/idlesway = SubResource( 2 )
+anims/swing = SubResource( 1 )
+anims/walkdown = SubResource( 3 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-modulate = Color( 1, 1, 1, 0.54698 )
-texture = ExtResource( 2 )
-hframes = 2
-frame = 1
-_sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
-
-shape = SubResource( 2 )
+position = Vector2( 0, 18 )
+shape = SubResource( 4 )
 _sections_unfolded = [ "Pause", "Transform" ]
 
-[node name="FSM2D" type="Node2D" parent="." index="3"]
+[node name="FSM2D" type="Node2D" parent="." index="2"]
 
 editor/display_folded = true
-script = ExtResource( 3 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
-"_editor_icon": ExtResource( 4 )
+"_editor_icon": ExtResource( 9 )
 }
 path2LogicRoot = NodePath("..")
 onlyActiveStateOnTheScene = false
@@ -102,94 +325,101 @@ initManually = false
 updateMode = 1
 receiceSignalsOnly4ActiveStatesAndTransitions = true
 enableDebug = false
-"Initial state:" = ""
+"Initial state:" = "SEARCH"
 "Create new:/Subdirectory for FSM nodes:" = "FSM"
 "Create new:/Create state with name:" = null
 "Create new:/Create transition with name:" = null
 GraphData = {
-"ATTACK": Vector2( 657, 784 ),
-"ATTACK_": Vector2( 657, 784 ),
+"ATTACK": Vector2( 887, 914 ),
+"ATTACK_": Vector2( 887, 914 ),
+"ATTACK__": Vector2( 616, 808 ),
 "DEFEND": Vector2( 1112, 484 ),
 "DEFEND_": Vector2( 1112, 484 ),
-"WANDER": Vector2( 643, 395 ),
-"WANDER_": Vector2( 643, 395 ),
+"DEFEND__": Vector2( 1112, 484 ),
+"PURSUE": Vector2( 333, 869 ),
+"PURSUE_": Vector2( 416, 892 ),
+"SEARCH": Vector2( 292, 474 ),
+"SEARCH_": Vector2( 292, 474 ),
+"SEARCH__": Vector2( 297, 411 ),
+"WANDER": Vector2( 638, 453 ),
+"WANDER_": Vector2( 638, 453 ),
+"WANDER__": Vector2( 669, 413 ),
 "Wander": Vector2( 497, 366 ),
 "Wander_": Vector2( 497, 366 ),
-"attack_end": Vector2( 1171, 705 ),
-"attack_end_": Vector2( 1171, 705 ),
-"attack_ready": Vector2( 868, 672 ),
-"attack_ready_": Vector2( 868, 672 ),
-"on_find_target": Vector2( 636, 612 ),
-"on_find_target_": Vector2( 636, 612 ),
-"on_lose_sight": Vector2( 808, 497 ),
-"on_lose_sight_": Vector2( 808, 497 )
+"attack_end": Vector2( 907, 732 ),
+"attack_end_": Vector2( 907, 732 ),
+"attack_end__": Vector2( 1171, 705 ),
+"attack_ready": Vector2( 859, 554 ),
+"attack_ready_": Vector2( 859, 554 ),
+"attack_ready__": Vector2( 868, 672 ),
+"in_range": Vector2( 661, 892 ),
+"in_range_": Vector2( 661, 892 ),
+"on_find_target": Vector2( 403, 683 ),
+"on_find_target_": Vector2( 403, 683 ),
+"on_find_target__": Vector2( 434, 611 ),
+"on_lose_sight": Vector2( 673, 287 ),
+"on_lose_sight_": Vector2( 673, 287 ),
+"on_lose_sight__": Vector2( 734, 568 ),
+"on_lost": Vector2( 448, 271 ),
+"on_lost_": Vector2( 448, 271 ),
+"on_lost__": Vector2( 551, 202 ),
+"on_search_fail": Vector2( 407, 300 ),
+"on_search_fail_": Vector2( 407, 300 )
 }
 
 [node name="States" type="Node2D" parent="FSM2D" index="0"]
 
-[node name="WANDER" parent="FSM2D/States" index="0" instance=ExtResource( 5 )]
+[node name="WANDER" parent="FSM2D/States" index="0" instance=ExtResource( 10 )]
 
-[node name="ATTACK" parent="FSM2D/States" index="1" instance=ExtResource( 6 )]
+[node name="ATTACK" parent="FSM2D/States" index="1" instance=ExtResource( 11 )]
 
-[node name="DEFEND" parent="FSM2D/States" index="2" instance=ExtResource( 7 )]
+[node name="DEFEND" parent="FSM2D/States" index="2" instance=ExtResource( 12 )]
+
+[node name="SEARCH" type="Node" parent="FSM2D/States" index="3" instance=ExtResource( 13 )]
+
+script = ExtResource( 14 )
+
+[node name="PURSUE" type="Node" parent="FSM2D/States" index="4" instance=ExtResource( 15 )]
+
+script = ExtResource( 16 )
 
 [node name="Transitions" type="Node2D" parent="FSM2D" index="1"]
 
-[node name="on_find_target" parent="FSM2D/Transitions" index="0" instance=ExtResource( 8 )]
+[node name="on_find_target" parent="FSM2D/Transitions" index="0" instance=ExtResource( 17 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/Wander"), NodePath("../../States/WANDER") ]
-path2TargetState = NodePath("../../States/ATTACK")
+path2SourceStates = [ NodePath(""), NodePath("../../States/Wander"), NodePath("../../States/WANDER"), NodePath("../../States/SEARCH") ]
+path2TargetState = NodePath("../../States/PURSUE")
 
-[node name="attack_end" parent="FSM2D/Transitions" index="1" instance=ExtResource( 9 )]
+[node name="attack_end" parent="FSM2D/Transitions" index="1" instance=ExtResource( 18 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/ATTACK") ]
-path2TargetState = NodePath("../../States/DEFEND")
+path2TargetState = NodePath("../../States/SEARCH")
 
-[node name="on_lose_sight" parent="FSM2D/Transitions" index="2" instance=ExtResource( 10 )]
+[node name="on_lose_sight" parent="FSM2D/Transitions" index="2" instance=ExtResource( 19 )]
+
+path2SourceStates = [ NodePath(""), NodePath("../../States/DEFEND"), NodePath("../../States/PURSUE") ]
+path2TargetState = NodePath("../../States/SEARCH")
+
+[node name="attack_ready" parent="FSM2D/Transitions" index="3" instance=ExtResource( 20 )]
 
 path2SourceStates = [ NodePath(""), NodePath("../../States/DEFEND") ]
+path2TargetState = NodePath("../../States/PURSUE")
+
+[node name="on_search_fail" type="Node" parent="FSM2D/Transitions" index="4" instance=ExtResource( 21 )]
+
+script = ExtResource( 22 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/SEARCH") ]
 path2TargetState = NodePath("../../States/WANDER")
+intervalBetweenChecks = -1.0
 
-[node name="attack_ready" parent="FSM2D/Transitions" index="3" instance=ExtResource( 11 )]
+[node name="in_range" type="Node" parent="FSM2D/Transitions" index="5" instance=ExtResource( 23 )]
 
-path2SourceStates = [ NodePath(""), NodePath("../../States/DEFEND") ]
+script = ExtResource( 24 )
+path2SourceStates = [ NodePath(""), NodePath("../../States/PURSUE") ]
 path2TargetState = NodePath("../../States/ATTACK")
+intervalBetweenChecks = -1.0
 
-[node name="Vision" type="RayCast2D" parent="." index="4"]
-
-visible = false
-enabled = false
-exclude_parent = true
-cast_to = Vector2( 0, 50 )
-collision_mask = 1
-_sections_unfolded = [ "Transform" ]
-
-[node name="_debug" type="Label" parent="." index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-margin_left = -6.0
-margin_top = -22.0
-margin_right = -42.0
-margin_bottom = -8.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
-text = "0.2
-0.2"
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="hitbox" type="Area2D" parent="." index="6"]
+[node name="hitbox" type="Area2D" parent="." index="3"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
@@ -205,8 +435,60 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
 
-shape = SubResource( 4 )
+position = Vector2( 0, -20 )
+shape = SubResource( 5 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="SpriteBody" type="Sprite" parent="." index="4"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+hframes = 6
+frame = 4
+_sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
+
+[node name="SpriteAxe" type="Sprite" parent="SpriteBody" index="0"]
+
+texture = ExtResource( 3 )
+hframes = 6
+frame = 4
+_sections_unfolded = [ "Animation", "Material", "Transform", "Visibility" ]
+
+[node name="_debug" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -14.0
+margin_top = -190.0
+margin_right = 46.0
+margin_bottom = -137.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 6 )
+text = "0.2
+0.2"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "custom_fonts" ]
+
+[node name="Vision" type="RayCast2D" parent="." index="6"]
+
+position = Vector2( 18.9381, -85.4919 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 50 )
+collision_mask = 1
+_sections_unfolded = [ "Material", "Transform" ]
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_Animation_animation_finished"]
 
 [connection signal="area_shape_entered" from="hitbox" to="." method="_on_hitbox_area_shape_entered"]
 

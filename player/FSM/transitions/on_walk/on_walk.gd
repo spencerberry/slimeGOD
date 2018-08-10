@@ -28,6 +28,4 @@ func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null):
 	pass
 
 func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null): 
-	if logicRoot.input_move() != Vector2(0,0):
-		return true
-	return false
+	return logicRoot.move != Vector2(0,0)

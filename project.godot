@@ -14,18 +14,16 @@ config/name="slimeGOD"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+direction="*res://directions.gd"
+
 [display]
 
-window/size/width=320
-window/size/height=160
+window/size/width=1280
+window/size/height=720
 window/size/resizable=false
 window/size/always_on_top=true
-window/size/test_width=1280
-window/size/test_height=640
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
-window/stretch/shrink="1"
 
 [editor_plugins]
 
@@ -61,6 +59,11 @@ p1_consume=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name
 2d_physics/layer_2="player attacks"
 2d_physics/layer_3="enemy attacks"
 2d_physics/layer_4="ally attacks"
+
+[physics]
+
+2d/default_gravity=0
+2d/default_gravity_vector=Vector2( 0, 0 )
 
 [rendering]
 

@@ -1,0 +1,9 @@
+[gd_resource type="CanvasItemMaterial" format=2]
+
+[resource]
+
+render_priority = 1
+blend_mode = 1
+light_mode = 0
+_sections_unfolded = [ "Resource" ]
+

@@ -1,7 +1,5 @@
 extends Node
 
-var b = "textvar"
-
 func _ready():
 	randomize()
 

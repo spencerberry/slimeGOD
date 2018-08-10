@@ -1,16 +1,15 @@
 extends "res://entities/entity.gd"
 
-const SPEED = 80
+const SPEED = 600
 const TYPE = "player"
 const DAMAGE = 1
-
-var attacking = true
 
 func _ready():
 	pass
 
 func _physics_process(delta):
-	$_debug.text = str($Attack.monitorable)
+	$_debug.text = str(stepify(position.x,.1)) #+ " " + str(stepify(position.y,.1))
+	$_debugRect.rect_position=Vector2(10,10)
 
 func input_move():	
 	var left 	= Input.is_action_pressed("p1_left")
@@ -22,7 +21,6 @@ func input_move():
 	move.y = -int(up) + int(down)
 	
 func attack():
-	choose_animation("attack")
 	attacking = true
 
 func attack_over(anim_name):
