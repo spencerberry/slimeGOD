@@ -22,13 +22,13 @@ func distance_to(target):
 func move_towards(target):
 	move = target.position-position
 
-func apply_movement():
+func apply_movement(multiplier=1):
 	var move_now
 	
 	if hit_safe != 0:
 		move_now = knockback_direction.normalized()*SPEED*2
 	else:
-		move_now = move.normalized()*SPEED
+		move_now = move.normalized()*SPEED*multiplier
 		
 	move_and_slide(move_now)
 

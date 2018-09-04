@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/axe.png-2e94ecb738f82f575f3ed735a092f64e.stex"
+path="res://.import/axe.png-1e5afbc15013ba0b16a8edc3ecb4e559.stex"
 
 [deps]
 
-source_file="res://entities/Axemob/axe.png"
-dest_files=[ "res://.import/axe.png-2e94ecb738f82f575f3ed735a092f64e.stex" ]
+source_file="res://art in progress/axe.png"
+dest_files=[ "res://.import/axe.png-1e5afbc15013ba0b16a8edc3ecb4e559.stex" ]
 
 [params]
 
