@@ -36,6 +36,7 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 		logicRoot.move_towards(logicRoot.target)
 		logicRoot.apply_movement()
 
+
 #when exiting state
 func exit(toState=null):
 	pass

@@ -227,6 +227,30 @@ tracks/10/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("hitbox:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.45 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -69.2888, 6.32924 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("hitbox:monitorable")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.45, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Animation" id=3]
 
@@ -365,6 +389,30 @@ tracks/10/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("hitbox:monitorable")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.45, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("hitbox:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0.45 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 88.6837, 6.32924 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 
@@ -429,7 +477,7 @@ _sections_unfolded = [ "Resource" ]
 [sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
-extents = Vector2( 42, 90 )
+extents = Vector2( 50, 100 )
 
 [sub_resource type="DynamicFont" id=7]
 
@@ -439,7 +487,7 @@ use_filter = false
 font_data = ExtResource( 21 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="axeman" type="KinematicBody2D" groups=[
+[node name="axeman" type="KinematicBody2D" index="0" groups=[
 "enemies",
 ]]
 
@@ -472,7 +520,6 @@ _sections_unfolded = [ "Pause", "Transform" ]
 
 [node name="FSM2D" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
 script = ExtResource( 8 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
@@ -495,13 +542,13 @@ GraphData = {
 "DEFEND": Vector2( 1112, 484 ),
 "DEFEND_": Vector2( 1112, 484 ),
 "DEFEND__": Vector2( 1112, 484 ),
-"PURSUE": Vector2( 333, 869 ),
-"PURSUE_": Vector2( 333, 869 ),
+"PURSUE": Vector2( 383, 902 ),
+"PURSUE_": Vector2( 383, 902 ),
 "SEARCH": Vector2( 292, 474 ),
 "SEARCH_": Vector2( 292, 474 ),
 "SEARCH__": Vector2( 297, 411 ),
-"WANDER": Vector2( 638, 453 ),
-"WANDER_": Vector2( 638, 453 ),
+"WANDER": Vector2( 605, 481 ),
+"WANDER_": Vector2( 605, 481 ),
 "WANDER__": Vector2( 669, 413 ),
 "Wander": Vector2( 497, 366 ),
 "Wander_": Vector2( 497, 366 ),
@@ -513,8 +560,8 @@ GraphData = {
 "attack_ready__": Vector2( 868, 672 ),
 "in_range": Vector2( 661, 892 ),
 "in_range_": Vector2( 661, 892 ),
-"on_find_target": Vector2( 403, 683 ),
-"on_find_target_": Vector2( 403, 683 ),
+"on_find_target": Vector2( 325, 662 ),
+"on_find_target_": Vector2( 325, 662 ),
 "on_find_target__": Vector2( 434, 611 ),
 "on_lose_sight": Vector2( 673, 287 ),
 "on_lose_sight_": Vector2( 673, 287 ),
@@ -572,51 +619,54 @@ path2TargetState = NodePath("../../States/ATTACK")
 
 [node name="hitbox" type="Area2D" parent="." index="3"]
 
+position = Vector2( 88.6837, 6.32924 )
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 linear_damp = 0.1
 angular_damp = 1.0
-monitorable = false
-collision_layer = 0
+monitoring = false
+collision_layer = 8
 collision_mask = 10
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
 
-position = Vector2( 0, -20 )
 shape = SubResource( 6 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="SpriteBody" type="Sprite" parent="." index="4"]
 
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 hframes = 6
-frame = 1
+frame = 2
 _sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
 
 [node name="SpriteAxe" type="Sprite" parent="SpriteBody" index="0"]
 
 position = Vector2( 28.8373, 8.65118 )
 rotation = -0.0122173
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 hframes = 6
-frame = 1
+frame = 2
 _sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
 
-[node name="_debug" type="Label" parent="." index="5"]
+[node name="mood" type="Label" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -14.0
-margin_top = -190.0
-margin_right = 46.0
-margin_bottom = -137.0
+margin_left = -29.0
+margin_top = -154.0
+margin_right = 31.0
+margin_bottom = -123.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -624,15 +674,39 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 7 )
-text = "0.2
-0.2"
+text = "???"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "custom_fonts" ]
 
-[node name="Vision" type="RayCast2D" parent="." index="6"]
+[node name="_debug" type="Label" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -19.0
+margin_top = 106.0
+margin_right = 81.0
+margin_bottom = 131.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 7 )
+text = "state"
+align = 1
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "custom_fonts" ]
+
+[node name="Vision" type="RayCast2D" parent="." index="7"]
 
 position = Vector2( 0, -40 )
 enabled = true

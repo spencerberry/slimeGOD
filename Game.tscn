@@ -22,21 +22,22 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Map" parent="." index="0" instance=ExtResource( 2 )]
 
+position = Vector2( 12.5417, 3.13538 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
-[node name="axeman" parent="." index="1" instance=ExtResource( 3 )]
+[node name="axeman" parent="Map" index="3" instance=ExtResource( 3 )]
 
-position = Vector2( -1105.88, -459.49 )
+position = Vector2( -1118.42, -462.625 )
 
-[node name="axeman2" parent="." index="2" instance=ExtResource( 3 )]
+[node name="axeman2" parent="Map" index="4" instance=ExtResource( 3 )]
 
-position = Vector2( 1133.68, -446.263 )
+position = Vector2( 1121.14, -449.398 )
 
-[node name="Player1" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Player1" parent="Map" index="5" instance=ExtResource( 4 )]
 
-position = Vector2( 60.3484, 464.719 )
+position = Vector2( 47.8067, 461.584 )
 
-[node name="Camera" parent="Player1" index="8" instance=ExtResource( 5 )]
+[node name="Camera" parent="Map/Player1" index="8" instance=ExtResource( 5 )]
 
 position = Vector2( 1002.28, 552.163 )
 scale = Vector2( 2, 2 )
@@ -52,7 +53,7 @@ drag_margin_top = 0.5
 drag_margin_bottom = 0.0
 _sections_unfolded = [ "Drag Margin", "Limit", "Smoothing", "Transform" ]
 
-[node name="_debug" type="Label" parent="Player1/Camera" index="0"]
+[node name="_debug" type="Label" parent="Map/Player1/Camera" index="0"]
 
 visible = false
 anchor_left = 0.0

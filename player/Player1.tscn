@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://player/Player1.gd" type="Script" id=1]
 [ext_resource path="res://player/edmund_hopup_body.png" type="Texture" id=2]
@@ -8,25 +8,22 @@
 [ext_resource path="res://player/edmund_rollright_body.png" type="Texture" id=6]
 [ext_resource path="res://player/edmund_rollright_soul.png" type="Texture" id=7]
 [ext_resource path="res://player/edmund_rollright_face.png" type="Texture" id=8]
-[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=9]
-[ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=10]
-[ext_resource path="res://player/FSM/states/idle/idle.tscn" type="PackedScene" id=11]
-[ext_resource path="res://player/FSM/states/ROLL/ROLL.tscn" type="PackedScene" id=12]
-[ext_resource path="res://player/FSM/states/SKID/SKID.tscn" type="PackedScene" id=13]
-[ext_resource path="res://player/FSM/states/SLIDE/SLIDE.tscn" type="PackedScene" id=14]
-[ext_resource path="res://player/FSM/states/HOP/HOP.tscn" type="PackedScene" id=15]
-[ext_resource path="res://player/FSM/states/HOP/HOP.gd" type="Script" id=16]
+[ext_resource path="res://player/AddCanvas.tres" type="Material" id=9]
+[ext_resource path="res://addons/net.kivano.fsm/content/fsm.gd" type="Script" id=10]
+[ext_resource path="res://addons/net.kivano.fsm/assets/ico2d.png" type="Texture" id=11]
+[ext_resource path="res://player/FSM/states/idle/idle.tscn" type="PackedScene" id=12]
+[ext_resource path="res://player/FSM/states/ROLL/ROLL.tscn" type="PackedScene" id=13]
+[ext_resource path="res://player/FSM/states/SKID/SKID.tscn" type="PackedScene" id=14]
+[ext_resource path="res://player/FSM/states/SLIDE/SLIDE.tscn" type="PackedScene" id=15]
+[ext_resource path="res://player/FSM/states/HOP/HOP.tscn" type="PackedScene" id=16]
 [ext_resource path="res://player/FSM/transitions/on_walk/on_walk.tscn" type="PackedScene" id=17]
 [ext_resource path="res://player/FSM/transitions/on_roll_end/on_roll_end.tscn" type="PackedScene" id=18]
 [ext_resource path="res://player/FSM/transitions/skid_to_stop/skid_to_stop.tscn" type="PackedScene" id=19]
 [ext_resource path="res://player/FSM/transitions/on_slide/on_slide.tscn" type="PackedScene" id=20]
 [ext_resource path="res://player/FSM/transitions/on_slide_end/on_slide_end.tscn" type="PackedScene" id=21]
 [ext_resource path="res://player/FSM/transitions/on_hop/on_hop.tscn" type="PackedScene" id=22]
-[ext_resource path="res://player/FSM/transitions/on_hop/on_hop.gd" type="Script" id=23]
-[ext_resource path="res://player/FSM/transitions/on_hop_end/on_hop_end.tscn" type="PackedScene" id=24]
-[ext_resource path="res://player/FSM/transitions/on_hop_end/on_hop_end.gd" type="Script" id=25]
-[ext_resource path="res://player/AddCanvas.tres" type="Material" id=26]
-[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=27]
+[ext_resource path="res://player/FSM/transitions/on_hop_end/on_hop_end.tscn" type="PackedScene" id=23]
+[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=24]
 
 [sub_resource type="Animation" id=1]
 
@@ -196,6 +193,18 @@ tracks/8/keys = {
 "update": 1,
 "values": [ 5 ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("SpriteBody:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 
@@ -345,6 +354,18 @@ tracks/11/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteBody:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -496,29 +517,40 @@ tracks/11/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("SpriteBody:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=9]
 
 custom_solver_bias = 0.0
-extents = Vector2( 55, 40 )
-_sections_unfolded = [ "Resource" ]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id=10]
+
+custom_solver_bias = 0.0
+radius = 50.9902
 
 [sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="CircleShape2D" id=7]
-
-custom_solver_bias = 0.0
-radius = 21.0
-
 [sub_resource type="DynamicFont" id=8]
 
 size = 20
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 27 )
+font_data = ExtResource( 24 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Player1" type="KinematicBody2D" index="0" groups=[
@@ -530,7 +562,7 @@ collision_layer = 3
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Pause", "Pickable", "Transform", "Visibility", "collision" ]
+_sections_unfolded = [ "Collision", "Pause", "Pickable", "Transform", "Z Index", "collision" ]
 
 [node name="Animation" type="AnimationPlayer" parent="." index="0"]
 
@@ -548,15 +580,88 @@ _sections_unfolded = [ "Playback Options" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-shape = SubResource( 5 )
-_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
+shape = SubResource( 9 )
+_sections_unfolded = [ "Material", "Pause", "Transform" ]
 
-[node name="FSM" type="Node2D" parent="." index="2"]
+[node name="hurtbox" type="Area2D" parent="." index="2"]
 
-script = ExtResource( 9 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 8
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" index="0"]
+
+shape = SubResource( 10 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="hitbox" type="Area2D" parent="." index="3"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+monitorable = false
+collision_layer = 16
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
+
+shape = SubResource( 6 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="SpriteBody" type="Sprite" parent="." index="4"]
+
+modulate = Color( 1, 1, 1, 0.862745 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+hframes = 6
+frame = 4
+_sections_unfolded = [ "Animation", "Material", "Offset", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SpriteSoul" type="Sprite" parent="SpriteBody" index="0"]
+
+modulate = Color( 0.449549, 0.793498, 0.22124, 0.436471 )
+material = ExtResource( 9 )
+texture = ExtResource( 4 )
+hframes = 5
+frame = 1
+_sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
+
+[node name="SpriteFace" type="Sprite" parent="SpriteBody" index="1"]
+
+texture = ExtResource( 5 )
+hframes = 5
+frame = 1
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
+
+[node name="FSM" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
+script = ExtResource( 10 )
 _sections_unfolded = [ "Create new:" ]
 __meta__ = {
-"_editor_icon": ExtResource( 10 )
+"_editor_icon": ExtResource( 11 )
 }
 path2LogicRoot = NodePath("..")
 onlyActiveStateOnTheScene = false
@@ -591,15 +696,15 @@ GraphData = {
 "on_hop": Vector2( 287, 296 ),
 "on_hop_": Vector2( 287, 296 ),
 "on_hop_end": Vector2( 732, 729 ),
-"on_hop_end_": Vector2( 793, 736 ),
+"on_hop_end_": Vector2( 732, 729 ),
 "on_roll": Vector2( 48, 325 ),
 "on_roll_": Vector2( 48, 325 ),
 "on_roll_end": Vector2( 631, 804 ),
-"on_roll_end_": Vector2( 718, 801 ),
+"on_roll_end_": Vector2( 631, 804 ),
 "on_slide": Vector2( 474, 296 ),
 "on_slide_": Vector2( 474, 296 ),
 "on_slide_end": Vector2( 827, 661 ),
-"on_slide_end_": Vector2( 849, 662 ),
+"on_slide_end_": Vector2( 827, 661 ),
 "on_walk": Vector2( 1013, 383 ),
 "on_walk_": Vector2( 1013, 383 ),
 "skid_to_stop": Vector2( 499, 158 ),
@@ -608,17 +713,15 @@ GraphData = {
 
 [node name="States" type="Node2D" parent="FSM" index="0"]
 
-[node name="IDLE" parent="FSM/States" index="0" instance=ExtResource( 11 )]
+[node name="IDLE" parent="FSM/States" index="0" instance=ExtResource( 12 )]
 
-[node name="ROLL" parent="FSM/States" index="1" instance=ExtResource( 12 )]
+[node name="ROLL" parent="FSM/States" index="1" instance=ExtResource( 13 )]
 
-[node name="SKID" parent="FSM/States" index="2" instance=ExtResource( 13 )]
+[node name="SKID" parent="FSM/States" index="2" instance=ExtResource( 14 )]
 
-[node name="SLIDE" parent="FSM/States" index="3" instance=ExtResource( 14 )]
+[node name="SLIDE" parent="FSM/States" index="3" instance=ExtResource( 15 )]
 
-[node name="HOP" type="Node" parent="FSM/States" index="4" instance=ExtResource( 15 )]
-
-script = ExtResource( 16 )
+[node name="HOP" parent="FSM/States" index="4" instance=ExtResource( 16 )]
 
 [node name="Transitions" type="Node2D" parent="FSM" index="1"]
 
@@ -649,93 +752,20 @@ path2TargetState = NodePath("../../States/SLIDE")
 path2SourceStates = [ NodePath(""), NodePath("../../States/SLIDE") ]
 path2TargetState = NodePath("../../States/SKID")
 
-[node name="on_hop" type="Node" parent="FSM/Transitions" index="5" instance=ExtResource( 22 )]
+[node name="on_hop" parent="FSM/Transitions" index="5" instance=ExtResource( 22 )]
 
-script = ExtResource( 23 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/IDLE"), NodePath("../../States/SLIDE"), NodePath("../../States/ROLL") ]
 path2TargetState = NodePath("../../States/HOP")
-intervalBetweenChecks = -1.0
 
-[node name="on_hop_end" type="Node" parent="FSM/Transitions" index="6" instance=ExtResource( 24 )]
+[node name="on_hop_end" parent="FSM/Transitions" index="6" instance=ExtResource( 23 )]
 
-script = ExtResource( 25 )
 path2SourceStates = [ NodePath(""), NodePath("../../States/HOP") ]
 path2TargetState = NodePath("../../States/SKID")
-intervalBetweenChecks = -1.0
-
-[node name="Attack" type="Area2D" parent="." index="3"]
-
-visible = false
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 0.0
-linear_damp = 0.1
-angular_damp = 1.0
-monitoring = false
-monitorable = false
-collision_layer = 2
-collision_mask = 0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" index="0"]
-
-shape = SubResource( 6 )
-_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
-
-[node name="hitbox" type="Area2D" parent="." index="4"]
-
-editor/display_folded = true
-visible = false
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 0.0
-linear_damp = 0.1
-angular_damp = 1.0
-monitorable = false
-collision_layer = 0
-collision_mask = 4
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
-
-shape = SubResource( 7 )
-
-[node name="SpriteBody" type="Sprite" parent="." index="5"]
-
-modulate = Color( 1, 1, 1, 0.862745 )
-material = ExtResource( 26 )
-position = Vector2( 0, -4.32729 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-hframes = 6
-frame = 4
-_sections_unfolded = [ "Animation", "Material", "Offset", "Transform" ]
-
-[node name="SpriteSoul" type="Sprite" parent="SpriteBody" index="0"]
-
-modulate = Color( 0.449549, 0.793498, 0.22124, 0.436471 )
-material = ExtResource( 26 )
-texture = ExtResource( 4 )
-hframes = 5
-frame = 1
-_sections_unfolded = [ "Animation", "Material", "Offset", "Transform", "Visibility" ]
-
-[node name="SpriteFace" type="Sprite" parent="SpriteBody" index="1"]
-
-texture = ExtResource( 5 )
-hframes = 5
-frame = 1
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
 [node name="_debug" type="Label" parent="." index="6"]
 
-visible = false
 modulate = Color( 0.921875, 0.907006, 0.907006, 0.51 )
-material = ExtResource( 26 )
+material = ExtResource( 9 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -764,8 +794,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 2.0
-margin_bottom = 2.0
+margin_left = -60.0
+margin_top = 60.0
+margin_right = 60.0
+margin_bottom = 92.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -773,8 +805,10 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 0, 0, 1 )
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Visibility" ]
 
 [connection signal="animation_finished" from="Animation" to="." method="animation_over"]
+
+[connection signal="area_shape_entered" from="hurtbox" to="." method="_on_hurtbox_area_shape_entered"]
 
 

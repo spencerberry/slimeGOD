@@ -36,8 +36,10 @@ func update(deltaTime, param0=null, param1=null, param2=null, param3=null, param
 
 #when exiting state
 func exit(toState=null):
+
 	logicRoot.set_collision_layer(3)
 	logicRoot.set_collision_mask(3)
+	logicRoot.apply_movement(2)
 
 ##################################################################################
 #########                       Connected Signals                        #########

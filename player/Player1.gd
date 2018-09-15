@@ -15,24 +15,13 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	$_debug.text = str(stepify(position.x,.1)) #+ " " + str(stepify(position.y,.1))
+	$_debug.text = $FSM.currentStateID #+ " " + str(stepify(position.y,.1))
 	$_debugRect.rect_position=Vector2(10,10)
-	
-#	pulse_timer += 1
-#
-#	if pulse_timer == pulse_length:
-#		pulse_timer = 0
-#		if goal_color == first_color:
-#			goal_color = second_color
-#		else:
-#			goal_color = first_color
-#	var step_color = goal_color/pulse_length
-#	if goal_color.gray() > $"SpriteBody/SpriteSoul".modulate.gray():
-#		$"SpriteBody/SpriteSoul".modulate+=step_color
-#	else:
-#		$"SpriteBody/SpriteSoul".modulate-=step_color
+	if hit_safe !=0:
+		$_debugRect.visible= true
+	else:
+		$_debugRect.visible= false
 		
-	
 
 func input_move():	
 	var left 	= Input.is_action_pressed("p1_left")
@@ -51,3 +40,6 @@ func animation_over(anim_name):
 		attacking = false
 	elif anim_name == "hopup":
 		hopping = false
+
+func _on_hurtbox_area_shape_entered(area_id, area, area_shape, self_shape):
+	take_damage_from(area)

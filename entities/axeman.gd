@@ -1,6 +1,8 @@
-extends "res://entities/entity.gd"
+extends "res://entities/human.gd"
 
 const SPEED = 300
+
+var count = 0
 
 var target
 
@@ -9,13 +11,13 @@ func _ready():
 
 func _physics_process(delta):
 	if sees_from("players") or sees_from("tests"):
-		$_debug.text='!!!'
+		$mood.text='!!!'
 	else:
-		$_debug.text='???'
-	
-	tick()
-
+		$mood.text='???'
 	apply_movement()
+
+	$_debug.text=$FSM2D.currentStateID
+
 
 func _on_hitbox_area_shape_entered(area_id, area, area_shape, self_shape):
 	take_damage_from(area)
