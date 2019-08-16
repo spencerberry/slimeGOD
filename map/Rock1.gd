@@ -9,8 +9,6 @@ func _ready():
 	# Initialization here
 	pass
 
-func _physics_process(delta):
-		z_index=10000-abs(position.y)
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
