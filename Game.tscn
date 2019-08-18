@@ -17,15 +17,19 @@ script = ExtResource( 1 )
 [node name="Map" parent="." instance=ExtResource( 2 )]
 position = Vector2( 12.5417, 3.13538 )
 
-[node name="human_axe" parent="Map" instance=ExtResource( 3 )]
+[node name="human_axe" parent="Map" groups=[
+"human",
+] instance=ExtResource( 3 )]
 position = Vector2( -1118.42, -462.625 )
 
 [node name="human_axe2" parent="Map" groups=[
-"humans",
+"horde",
 ] instance=ExtResource( 3 )]
 position = Vector2( 1121.14, -449.398 )
 
-[node name="slime" parent="Map" instance=ExtResource( 4 )]
+[node name="slime" parent="Map" groups=[
+"slime",
+] instance=ExtResource( 4 )]
 position = Vector2( 47.8067, 461.584 )
 
 [node name="Camera" parent="Map/slime" instance=ExtResource( 5 )]

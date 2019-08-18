@@ -671,15 +671,13 @@ tracks/4/keys = {
 extents = Vector2( 40, 90 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 100, 50 )
+extents = Vector2( 50, 100 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 20
 font_data = ExtResource( 10 )
 
-[node name="axe" type="KinematicBody2D" groups=[
-"enemies",
-]]
+[node name="axe" type="KinematicBody2D"]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource( 1 )
@@ -697,9 +695,10 @@ position = Vector2( 41.9727, -22.9234 )
 shape = SubResource( 6 )
 
 [node name="hitbox" type="Area2D" parent="."]
-position = Vector2( 36.7046, 74.803 )
+position = Vector2( -69.2888, 6.32924 )
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
+monitorable = false
 collision_layer = 8
 collision_mask = 10
 __meta__ = {
@@ -711,16 +710,18 @@ shape = SubResource( 7 )
 
 [node name="SpriteBody" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
+flip_h = true
 hframes = 6
-frame = 2
+frame = 5
 
 [node name="SpriteAxe" type="Sprite" parent="SpriteBody"]
 position = Vector2( 28.8373, 8.65118 )
 rotation = -0.0122173
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
+flip_h = true
 hframes = 6
-frame = 2
+frame = 5
 
 [node name="mood" type="Label" parent="."]
 margin_left = -29.0

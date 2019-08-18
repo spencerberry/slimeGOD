@@ -18,7 +18,7 @@ func exit():
 #warning-ignore:unused_argument
 func update(delta):
 
-	if not entity.sees_from("players"):
+	if not entity.sees_from("slime"):
 		entity.state_set("search")
 		
 	elif not entity.attacking:

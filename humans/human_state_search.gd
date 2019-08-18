@@ -19,7 +19,7 @@ func exit():
 func update(delta):
 	
 	searching_for -= delta
-	if entity.sees_from("players"):
+	if entity.sees_from("slime"):
 		entity.state_set("pursue")
 	elif searching_for < 0:
 		entity.state_set("wander")

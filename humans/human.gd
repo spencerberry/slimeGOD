@@ -19,6 +19,7 @@ var PursueState = load ("res://humans/human_state_pursue.gd")
 var SearchState = load ("res://humans/human_state_search.gd")
 var DefendState = load ("res://humans/human_state_defend.gd")
 var AttackState = load ("res://humans/human_state_attack.gd")
+var HordeState = load("res://humans/human_state_horde.gd")
 
 var searching_for = Timer.new()
 
@@ -28,13 +29,17 @@ func _ready():
 		pursue = PursueState.new(self),
 		search = SearchState.new(self),
 		defend = DefendState.new(self),
-		attack = AttackState.new(self)
+		attack = AttackState.new(self),
+		horde = HordeState.new(self)
 	}
 	state = states.wander
 
 	add_child(searching_for)
 	
 func _process(delta):
+	if is_in_group("horde"):
+		$SpriteBody.set_modulate(Color(0.4,0.4,1.0))
+		state_set("horde")
 	state.update(delta)
 	$_debug.text = state.name
 	$_debug/status.text = str(searching_for.get_time_left())
@@ -73,6 +78,8 @@ func sees(target):
 			if $Vision.get_collider() == target:
 				return true
 	return false
-	
+
+func join_the_horde():
+	pass
 
 	

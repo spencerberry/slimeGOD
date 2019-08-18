@@ -5,7 +5,7 @@ func _ready():
 
 #warning-ignore:unused_argument
 func _physics_process(delta):
-	if sees_from("players") or sees_from("tests"):
+	if sees_from("slime") or sees_from("horde"):
 		$mood.text='!!!'
 	else:
 		$mood.text='???'

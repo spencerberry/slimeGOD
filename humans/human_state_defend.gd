@@ -19,10 +19,10 @@ func exit():
 	pass
 	
 func update(delta):
-	if not entity.sees_from("players"):
+	if not entity.sees_from("slime"):
 		entity.state_set("search")
 	
-	entity.target = entity.closest_target("players")
+	entity.target = entity.closest_target("slime")
 	
 	if entity.target and escape_time > 0:
 		entity.move_away_from(entity.target)

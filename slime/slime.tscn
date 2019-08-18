@@ -359,9 +359,7 @@ radius = 50.9902
 size = 20
 font_data = ExtResource( 9 )
 
-[node name="slime" type="KinematicBody2D" groups=[
-"players",
-]]
+[node name="slime" type="KinematicBody2D"]
 collision_layer = 3
 script = ExtResource( 1 )
 
@@ -402,22 +400,22 @@ modulate = Color( 1, 1, 1, 0.862745 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 hframes = 8
-frame = 7
+frame = 1
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="SpriteSoul" type="Sprite" parent="SpriteBody"]
-modulate = Color( 0.397675, 0.839844, 0.0951385, 0.436471 )
+modulate = Color( 0.361089, 0.779046, 0.140858, 0.436471 )
 material = ExtResource( 8 )
 texture = ExtResource( 6 )
 hframes = 8
-frame = 7
+frame = 1
 
 [node name="SpriteFace" type="Sprite" parent="SpriteBody"]
 texture = ExtResource( 7 )
 hframes = 8
-frame = 7
+frame = 1
 
 [node name="_debug" type="Label" parent="."]
 modulate = Color( 0.921875, 0.907006, 0.907006, 0.51 )
