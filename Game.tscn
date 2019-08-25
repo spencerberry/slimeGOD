@@ -1,56 +1,48 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://map/Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://humans/axe.tscn" type="PackedScene" id=3]
 [ext_resource path="res://slime/slime.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/PICO-8.ttf" type="DynamicFontData" id=6]
-
-[sub_resource type="DynamicFont" id=1]
-size = 40
-font_data = ExtResource( 6 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Map" parent="." instance=ExtResource( 2 )]
-position = Vector2( 12.5417, 3.13538 )
+position = Vector2( 198.132, 444.188 )
 
 [node name="human_axe" parent="Map" groups=[
 "human",
 ] instance=ExtResource( 3 )]
-position = Vector2( -1118.42, -462.625 )
+position = Vector2( 16.3185, 1170.73 )
+
+[node name="human_axe3" parent="Map" groups=[
+"human",
+] instance=ExtResource( 3 )]
+position = Vector2( -317.893, -702.439 )
+
+[node name="human_axe4" parent="Map" groups=[
+"human",
+] instance=ExtResource( 3 )]
+position = Vector2( 2213.97, 684.542 )
 
 [node name="human_axe2" parent="Map" groups=[
 "horde",
 ] instance=ExtResource( 3 )]
-position = Vector2( 1121.14, -449.398 )
+position = Vector2( 512.272, 277.898 )
 
 [node name="slime" parent="Map" groups=[
 "slime",
 ] instance=ExtResource( 4 )]
-position = Vector2( 47.8067, 461.584 )
+position = Vector2( -18.444, 351.008 )
 
 [node name="Camera" parent="Map/slime" instance=ExtResource( 5 )]
-position = Vector2( 1002.28, 552.163 )
 scale = Vector2( 2, 2 )
 zoom = Vector2( 2, 2 )
-limit_left = 1280
-limit_top = -1280
-limit_right = 1280
-limit_bottom = 720
+process_mode = 0
 limit_smoothed = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
 smoothing_enabled = true
 smoothing_speed = 4.0
-drag_margin_top = 0.5
-drag_margin_bottom = 0.0
-
-[node name="_debug" type="Label" parent="Map/slime/Camera"]
-visible = false
-margin_left = -1806.0
-margin_top = 2603.0
-margin_right = 2075.0
-margin_bottom = 2814.0
-custom_fonts/font = SubResource( 1 )
-text = "oops"

@@ -1,9 +1,10 @@
 extends "res://entity.gd"
 
-class_name Slime
-
 const DAMAGE = 1
 
+var aura = Color(.2, .2, .2, .2)
+
+var input_mouse = Vector2()
 
 #warning-ignore:unused_class_variable
 #warning-ignore:unused_class_variable
@@ -19,8 +20,16 @@ func _ready():
 	
 	speed = 48000
 
+func _input(event):
+	if event is InputEventMouseMotion:
+		input_mouse = event.get_relative()
 
+#warning-ignore:unused_argument
 func _physics_process(delta):
+	pass
+	
+func _process(delta):
+	input_direction()
 
 	if hit_safe !=0:
 		$SpriteBody.set_modulate(Color(1.0,1.0,1.0,randf()))
@@ -28,11 +37,21 @@ func _physics_process(delta):
 		$SpriteBody.set_modulate(Color(1.0,1.0,1.0))
 
 	state.update(delta)
+	
+	$_debug.text = str($aura.get_position())
+	
+	var new_aura_position = $aura.get_position() + input_mouse
+	
+	new_aura_position.x = clamp(new_aura_position.x, -200, 200)
+	new_aura_position.y = clamp(new_aura_position.y, -200, 200)
+	
+	$aura.set_position(new_aura_position)
+	print(new_aura_position)
+	update()
+	
+func _draw():
+	draw_circle($aura.get_global_position(), $aura/CollisionShape2D.get_shape().radius, aura)
 
-#warning-ignore:unused_argument
-func _process(delta):
-	input_direction()
-	$_debug.text = str(knockback_direction)
 	
 func input_direction():	
 	var left 	= Input.is_action_pressed("p1_left")

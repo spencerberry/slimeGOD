@@ -15,10 +15,17 @@ func exit():
 func update(delta):
 	if entity.move == Vector2(0,0):
 		entity.state_set("idle")
-	elif entity.move.x < 0:
-		entity.animation_flip(true)
-	elif entity.move.x > 0:
-		entity.animation_flip(false)
+	elif abs(entity.move.x) < abs(entity.move.y):
+		if entity.move.y > 0:
+			entity.animation_set("rolldown")
+		else:
+			entity.animation_set("rollup")
+	else:
+		entity.animation_set("rollright")
+		if entity.move.x < 0:
+			entity.animation_flip(true)
+		else:
+			entity.animation_flip(false)
 	entity.apply_movement(delta)
 
 

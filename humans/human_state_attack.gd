@@ -9,7 +9,9 @@ func _init(entity).(entity):
 	name = "attack"
 
 func enter():
-	entity.animation_set("swingdown")
+	var distance = entity.distance_to(entity.target)
+	var new_state = "swing" + direction.of(distance)
+	entity.animation_set(new_state)
 	entity.attacking = true
 
 func exit():

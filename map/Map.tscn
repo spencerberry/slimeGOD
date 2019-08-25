@@ -1,39 +1,52 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://map/Rock1.tscn" type="PackedScene" id=1]
 
-[node name="Map" type="YSort" index="0"]
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
 
-sort_enabled = true
-_sections_unfolded = [ "Sort", "Transform", "Z Index" ]
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
 
-[node name="BlackBG" type="ColorRect" parent="." index="0"]
+[node name="Map" type="YSort"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -1600.0
-margin_top = -2397.0
-margin_right = 1320.0
-margin_bottom = 964.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+[node name="BlackBG" type="ColorRect" parent="."]
+margin_left = -4786.46
+margin_top = -2930.69
+margin_right = 14669.5
+margin_bottom = 10849.3
+rect_pivot_offset = Vector2( 2004.37, 2397.26 )
 color = Color( 0, 0, 0, 1 )
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Rect", "Visibility" ]
 
-[node name="Rock1" parent="." index="1" instance=ExtResource( 1 )]
+[node name="Rock1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 857.452, -557.727 )
+physics_material_override = SubResource( 1 )
 
-position = Vector2( -107.005, 228.545 )
-_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+[node name="Rock2" parent="." instance=ExtResource( 1 )]
+position = Vector2( -271.998, -261.679 )
+physics_material_override = SubResource( 2 )
 
-[node name="Rock2" parent="." index="2" instance=ExtResource( 1 )]
+[node name="Rock4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -119.49, 703.242 )
+physics_material_override = SubResource( 2 )
 
-position = Vector2( -711.932, -240.208 )
-_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
+[node name="Rock6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 507.664, 1171.57 )
+physics_material_override = SubResource( 2 )
 
+[node name="Rock5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2066.14, 373.916 )
+physics_material_override = SubResource( 2 )
 
+[node name="Rock7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1674.35, 963.401 )
+physics_material_override = SubResource( 2 )
+
+[node name="Rock8" parent="." instance=ExtResource( 1 )]
+position = Vector2( -762.354, 445.929 )
+physics_material_override = SubResource( 2 )
+
+[node name="Rock3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1154.67, -51.5774 )
+scale = Vector2( -1, 1 )
+physics_material_override = SubResource( 2 )

@@ -1,38 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://map/Rock1.gd" type="Script" id=1]
 [ext_resource path="res://map/art/rock1.png" type="Texture" id=2]
 
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
 
-[sub_resource type="CapsuleShape2D" id=1]
-
-custom_solver_bias = 0.0
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 90.0
 height = 440.0
 
 [node name="Rock1" type="StaticBody2D"]
-
-input_pickable = false
 collision_layer = 3
 collision_mask = 3
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 0.0
-bounce = 0.0
+physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Z Index" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -28.2224, 15.2871 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -22.3427, -7.0556 )
 rotation = 1.5708
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-
+shape = SubResource( 2 )

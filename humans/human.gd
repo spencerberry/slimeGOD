@@ -5,47 +5,33 @@ var target #used in states
 
 const VISION_RANGE = 1200
 const HIT_RANGE = 160
+const FOLLOW_RANGE = 200
 
 const FOV = 180
 
-#warning-ignore:unused_class_variable
-#warning-ignore:unused_class_variable
-#warning-ignore:unused_class_variable
-#warning-ignore:unused_class_variable
-#warning-ignore:unused_class_variable
+var master = null
 
-var WanderState = load ("res://humans/human_state_wander.gd")
-var PursueState = load ("res://humans/human_state_pursue.gd")
-var SearchState = load ("res://humans/human_state_search.gd")
-var DefendState = load ("res://humans/human_state_defend.gd")
-var AttackState = load ("res://humans/human_state_attack.gd")
-var HordeState = load("res://humans/human_state_horde.gd")
-
-var searching_for = Timer.new()
+#warning-ignore:unused_class_variable
+#warning-ignore:unused_class_variable
+#warning-ignore:unused_class_variable
+#warning-ignore:unused_class_variable
+#warning-ignore:unused_class_variable
 
 func _ready():
-	states = {
-		wander = WanderState.new(self),
-		pursue = PursueState.new(self),
-		search = SearchState.new(self),
-		defend = DefendState.new(self),
-		attack = AttackState.new(self),
-		horde = HordeState.new(self)
-	}
-	state = states.wander
+	become_autonomous()
 
-	add_child(searching_for)
 	
 func _process(delta):
 	if is_in_group("horde"):
 		$SpriteBody.set_modulate(Color(0.4,0.4,1.0))
-		state_set("horde")
+		become_minion()
 	state.update(delta)
 	$_debug.text = state.name
-	$_debug/status.text = str(searching_for.get_time_left())
+	if master:
+		$_debug/status.text = master.name
 	
-func move_towards(target):
-	move = distance_to(target)
+func move_towards(goal):
+	move = distance_to(goal)
 
 func move_away_from(target):
 	move = -distance_to(target)
@@ -79,7 +65,31 @@ func sees(target):
 				return true
 	return false
 
-func join_the_horde():
-	pass
+func become_minion():
+	var FollowState = load ("res://humans/human_state_follow.gd")
+	
+	states = {
+		follow = FollowState.new(self)
+	}
+	
+	state_set("follow")
+	master = get_tree().get_nodes_in_group("slime")[0]
+		
+func become_autonomous():
+	var WanderState = load ("res://humans/human_state_wander.gd")
+	var PursueState = load ("res://humans/human_state_pursue.gd")
+	var SearchState = load ("res://humans/human_state_search.gd")
+	var DefendState = load ("res://humans/human_state_defend.gd")
+	var AttackState = load ("res://humans/human_state_attack.gd")
+
+	states = {
+		wander = WanderState.new(self),
+		pursue = PursueState.new(self),
+		search = SearchState.new(self),
+		defend = DefendState.new(self),
+		attack = AttackState.new(self),
+	}
+	state = states.wander
+
 
 	
