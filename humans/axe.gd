@@ -6,9 +6,9 @@ func _ready():
 #warning-ignore:unused_argument
 func _physics_process(delta):
 	if sees_from("slime") or sees_from("horde"):
-		$mood.text='!!!'
+		$_debug/mood.text='!!!'
 	else:
-		$mood.text='???'
+		$_debug/mood.text='???'
 
 #warning-ignore:unused_argument
 #warning-ignore:unused_argument

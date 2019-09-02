@@ -23,6 +23,8 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion:
 		input_mouse = event.get_relative()
+	else:
+		input_mouse = Vector2(0,0)
 
 #warning-ignore:unused_argument
 func _physics_process(delta):
@@ -37,20 +39,12 @@ func _process(delta):
 		$SpriteBody.set_modulate(Color(1.0,1.0,1.0))
 
 	state.update(delta)
-	
-	$_debug.text = str($aura.get_position())
-	
-	var new_aura_position = $aura.get_position() + input_mouse
-	
-	new_aura_position.x = clamp(new_aura_position.x, -200, 200)
-	new_aura_position.y = clamp(new_aura_position.y, -200, 200)
-	
-	$aura.set_position(new_aura_position)
-	print(new_aura_position)
+	aura_move()
 	update()
+	$_debug.text = str(hit_safe)
 	
 func _draw():
-	draw_circle($aura.get_global_position(), $aura/CollisionShape2D.get_shape().radius, aura)
+	draw_circle($aura.get_position(), $aura/CollisionShape2D.get_shape().radius, aura)
 
 	
 func input_direction():	
@@ -80,4 +74,12 @@ func animation_flip(boolean):
 	$SpriteBody.flip_h = boolean
 	$SpriteBody/SpriteFace.flip_h = boolean
 	$SpriteBody/SpriteSoul.flip_h = boolean
+	
+func aura_move():
+	var new_aura_position = $aura.get_position() + input_mouse
+	var max_aura_offset = $aura/CollisionShape2D.get_shape().radius/2
 
+	new_aura_position.x = clamp(new_aura_position.x, -max_aura_offset, max_aura_offset)
+	new_aura_position.y = clamp(new_aura_position.y, -max_aura_offset, max_aura_offset)
+
+	$aura.set_position(new_aura_position)

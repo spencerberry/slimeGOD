@@ -13,11 +13,11 @@ func exit():
 	pass
 
 func update(delta):
-	if not entity.sees_from("slime"):
-		entity.state_set("search")
-		
-	entity.target = entity.closest_target("slime")
+	entity.target = entity.closest_target(entity.enemies)
 	
+	if not entity.target or not entity.sees(entity.target):
+		entity.state_set("search")
+
 	if entity.target and entity.distance_to(entity.target).length() < entity.HIT_RANGE:
 		entity.state_set("attack")
 	elif entity.target:

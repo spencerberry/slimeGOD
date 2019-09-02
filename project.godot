@@ -81,11 +81,8 @@ p1_consume={
 
 [layer_names]
 
-2d_physics/layer_1="solid_low"
-2d_physics/layer_2="solid_mid"
-2d_physics/layer_3="solid_high"
-2d_physics/layer_4="enemy_attack"
-2d_physics/layer_5="ally_attack"
+2d_physics/layer_1="solid"
+2d_physics/layer_2="hit"
 
 [physics]
 

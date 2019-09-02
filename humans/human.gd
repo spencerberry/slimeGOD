@@ -3,8 +3,10 @@ extends "res://entity.gd"
 #warning-ignore:unused_class_variable
 var target #used in states
 
+var enemies = "horde"
+
 const VISION_RANGE = 1200
-const HIT_RANGE = 160
+const HIT_RANGE = 200
 const FOLLOW_RANGE = 200
 
 const FOV = 180
@@ -20,16 +22,16 @@ var master = null
 func _ready():
 	become_autonomous()
 
-	
 func _process(delta):
 	if is_in_group("horde"):
-		$SpriteBody.set_modulate(Color(0.4,0.4,1.0))
 		become_minion()
+		
 	state.update(delta)
+	
 	$_debug.text = state.name
 	if master:
 		$_debug/status.text = master.name
-	
+		
 func move_towards(goal):
 	move = distance_to(goal)
 
@@ -67,14 +69,21 @@ func sees(target):
 
 func become_minion():
 	var FollowState = load ("res://humans/human_state_follow.gd")
+	var PursueState = load ("res://humans/human_state_pursue.gd")
+	var AttackState = load ("res://humans/human_state_attack.gd")
+	
+	$SpriteBody.set_modulate(Color(0.4,0.4,1.0))
 	
 	states = {
-		follow = FollowState.new(self)
+		follow = FollowState.new(self),
+		pursue = PursueState.new(self),
+		attack = AttackState.new(self)
 	}
 	
 	state_set("follow")
 	master = get_tree().get_nodes_in_group("slime")[0]
-		
+	enemies = "human"
+
 func become_autonomous():
 	var WanderState = load ("res://humans/human_state_wander.gd")
 	var PursueState = load ("res://humans/human_state_pursue.gd")

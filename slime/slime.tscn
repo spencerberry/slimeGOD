@@ -648,7 +648,7 @@ size = 20
 font_data = ExtResource( 12 )
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 329.0
+radius = 420.0
 
 [node name="slime" type="KinematicBody2D"]
 collision_layer = 3
@@ -662,7 +662,7 @@ anims/rollleft = SubResource( 3 )
 anims/rollright = SubResource( 4 )
 anims/rollup = SubResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="solidShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 6 )
 
 [node name="hurtbox" type="Area2D" parent="."]
@@ -708,7 +708,6 @@ texture = ExtResource( 7 )
 hframes = 8
 
 [node name="_debug" type="Label" parent="."]
-visible = false
 modulate = Color( 0.921875, 0.907006, 0.907006, 0.51 )
 material = ExtResource( 11 )
 margin_left = -50.0

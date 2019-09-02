@@ -14,7 +14,8 @@ func exit():
 
 func update(delta):
 	#entity.target = entity.closest_target("human")
-
+	if entity.sees_from(entity.enemies):
+		entity.state_set("pursue")
 	if entity.distance_to(entity.master).length() > entity.FOLLOW_RANGE and entity.sees(entity.master):
 		entity.move_towards(entity.master)
 		entity.apply_movement(delta)
